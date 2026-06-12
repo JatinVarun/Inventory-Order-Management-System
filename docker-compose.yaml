@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: inventory_postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: inventory_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: inventory_backend
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/inventory_db
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: inventory_frontend
+    ports:
+      - "3000:80"    
+    depends_on:
+      - backend
+
+
+volumes:
+  postgres_data:
