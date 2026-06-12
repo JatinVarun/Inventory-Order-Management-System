@@ -203,21 +203,6 @@ docker compose down
 
 ---
 
-## Environment Variables
-
-### Backend
-
-```env
-DATABASE_URL=postgresql://username:password@db:5432/inventory
-```
-
-### Frontend
-
-```env
-VITE_API_URL=https://inventory-order-management-system-1-t4j3.onrender.com
-```
-
----
 
 ## Deployment
 
